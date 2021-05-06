@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+function Home(props) {
+	const [input, setInput] = useState("");
 
-//create your first component
-export function Home() {
+	const idOnSubmit = e => {
+		e.preventDefault();
+
+		props.onSubmit({
+			id: Math.floor(Math.random() * 1000),
+			tarea: input
+		});
+		setInput("");
+	};
+	const onChangeInput = e => {
+		setInput(e.target.value);
+	};
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="container">
+			<form onSubmit={idOnSubmit}>
+				<div className="row justify-content-center">
+					<div className="col-4 bg-white top">
+						<input
+							type="text"
+							className="form-control mb-2"
+							id="inlineFormInput"
+							placeholder="Ingrese Tarea"
+							onChange={onChangeInput}
+							value={input}
+						/>
+					</div>
+				</div>
+			</form>
 		</div>
 	);
 }
+Home.propTypes = {
+	idOnSubmit: PropTypes.func,
+	onSubmit: PropTypes.func
+};
+export default Home;
