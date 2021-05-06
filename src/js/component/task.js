@@ -4,7 +4,7 @@ function Task(props) {
 	var a = props;
 	var tasks = a.tasks;
 	var completeTask = a.completeTask;
-	// var deleteTask = a.deleteTask;
+	var deleteTask = a.deleteTask;
 
 	return (
 		<div>
@@ -23,8 +23,7 @@ function Task(props) {
 							<div className="todo">
 								<i
 									className="far fa-times-circle"
-									// onClick={() => deleteTask(task.id)}
-								></i>
+									onClick={() => deleteTask(task.id)}></i>
 							</div>
 						</div>
 					</div>

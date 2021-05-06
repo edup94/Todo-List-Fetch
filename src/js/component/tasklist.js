@@ -10,10 +10,10 @@ export function Tasklist() {
 		setTasks(newTasks);
 	};
 
-	// const deleteTask = id => {
-	// 	const removeArr = [...tasks].filter(task => task.id !== id);
-	// 	setTasks(removeArr);
-	// };
+	const deleteTask = id => {
+		const removeArr = [...tasks].filter(task => task.id !== id);
+		setTasks(removeArr);
+	};
 
 	const completeTask = id => {
 		let completeTodo = tasks.map(task => {
@@ -37,7 +37,7 @@ export function Tasklist() {
 			<Task
 				tasks={tasks}
 				completeTask={completeTask}
-				// deleteTask={deleteTask}
+				deleteTask={deleteTask}
 			/>
 		</div>
 	);
