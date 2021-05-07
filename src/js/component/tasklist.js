@@ -1,23 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Home from "./home.js";
 import Task from "./task.js";
 
 export function Tasklist() {
 	const [tasks, setTasks] = useState([]);
+	const [showError, setShowError] = useState(false);
+
+	useEffect(() => {
+		getData();
+	}, []);
 
 	const addTask = task => {
 		const newTasks = [task, ...tasks];
 		setTasks(newTasks);
+		updateData(newTasks);
 	};
 
-	const deleteTask = id => {
-		const removeArr = [...tasks].filter(task => task.id !== id);
+	const getData = () => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/edup94")
+			.then(resp => resp.json())
+			.then(data => setTasks(data))
+			.catch(error => setShowError(true));
+	};
+
+	const updateData = updatedList => {
+		let updatedListToSend = JSON.stringify(updatedList);
+		let options = {
+			method: "PUT",
+			body: updatedListToSend,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+		console.log(updatedListToSend);
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/edup94",
+			options
+		)
+			.then(resp => resp.json())
+			.then(data => console.log(data))
+			.catch(error => console.log(error));
+	};
+
+	const deleteData = updatedList => {
+		let updatedListToSend = JSON.stringify(updatedList);
+		let options = {
+			method: "PUT",
+			body: updatedListToSend,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+		console.log(updatedListToSend);
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/edup94",
+			options
+		)
+			.then(resp => resp.json())
+			.then(data => console.log(data))
+			.catch(error => console.log(error));
+	};
+
+	const deleteTask = i => {
+		const removeArr = [...tasks].filter(task => task.label !== i);
 		setTasks(removeArr);
+		deleteData(removeArr);
 	};
 
-	const completeTask = id => {
+	const completeTask = i => {
 		let completeTodo = tasks.map(task => {
-			if (task.id === id) {
+			if (task.label === i) {
 				task.isComplete = !task.isComplete;
 			}
 			return task;
@@ -39,6 +91,7 @@ export function Tasklist() {
 				completeTask={completeTask}
 				deleteTask={deleteTask}
 			/>
+			{showError ? <h1>Algo salió mal!</h1> : null}
 		</div>
 	);
 }

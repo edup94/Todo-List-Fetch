@@ -16,14 +16,14 @@ function Task(props) {
 						<div className="row todo lista col-4">
 							<div
 								className="todo col justify-content-start"
-								key={task.id}
-								onClick={() => completeTask(task.id)}>
-								{task.tarea}
+								key={task.label}
+								onClick={() => completeTask(task.label)}>
+								{task.label}
 							</div>
 							<div className="todo">
 								<i
 									className="far fa-times-circle"
-									onClick={() => deleteTask(task.id)}></i>
+									onClick={() => deleteTask(task.label)}></i>
 							</div>
 						</div>
 					</div>

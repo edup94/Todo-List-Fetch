@@ -8,8 +8,8 @@ function Home(props) {
 		e.preventDefault();
 
 		props.onSubmit({
-			id: Math.floor(Math.random() * 1000),
-			tarea: input
+			label: input,
+			done: false
 		});
 		setInput("");
 	};
