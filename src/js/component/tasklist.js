@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Home from "./home.js";
 import Task from "./task.js";
+import { array } from "prop-types";
 
 export function Tasklist() {
 	const [tasks, setTasks] = useState([]);
@@ -78,7 +79,7 @@ export function Tasklist() {
 	};
 
 	return (
-		<div className="container bg-secondary">
+		<div className="container">
 			<div className="row justify-content-center">
 				<h1>To Do</h1>
 			</div>
